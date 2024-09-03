@@ -1,8 +1,8 @@
 import express from 'express'
 import 'dotenv/config'
 import dbConnection from '../database/config.js'
-import {getVehicle, postVehicle, putVehicle, deleteVehicle} from '../controllers/vehicleController.js'
 import {createUser} from '../controllers/userController.js'
+import routesVehicle from '../routes/vehicleRoute.js'
 
 export default class Server{
     constructor(){
@@ -26,10 +26,7 @@ export default class Server{
 
     route(){
         this.app.use(express.json())//Convert data to json
-        this.app.get(this.pathVehicle, getVehicle)
-        this.app.post(this.pathVehicle, postVehicle)
-        this.app.put(this.pathVehicle, putVehicle)
-        this.app.delete(this.pathVehicle+('/:id'), deleteVehicle)
+        this.app.use(this.pathVehicle, routesVehicle)
         this.app.post('/user', createUser)
     }
 }
