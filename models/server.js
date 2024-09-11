@@ -3,6 +3,7 @@ import 'dotenv/config'
 import dbConnection from '../database/config.js'
 import {createUser} from '../controllers/userController.js'
 import routesVehicle from '../routes/vehicleRoute.js'
+import routeLogin from '../routes/loginRoute.js'
 
 export default class Server{
     constructor(){
@@ -27,6 +28,7 @@ export default class Server{
     route(){
         this.app.use(express.json())//Convert data to json
         this.app.use(this.pathVehicle, routesVehicle)
+        this.app.use(routeLogin)
         this.app.post('/user', createUser)
     }
 }

@@ -3,7 +3,7 @@ import Vehicle from '../models/vehicle.js'
 export async function getVehicle(req, res){
     try {
         const vehicles =  await Vehicle.find()
-        res.json(vehicles)
+        res.json({vehicles})
     } catch (error) {
         res.status(500).json({error})
     }
